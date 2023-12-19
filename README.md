@@ -1,4 +1,4 @@
-# Team_Kavach Hackathon Project
+# Rajasthan Police Hackathon Project
 
 🚀 **Registration ID: RJPOLICE_HACK_846**
 
