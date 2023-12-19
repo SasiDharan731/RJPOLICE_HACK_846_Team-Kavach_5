@@ -28,7 +28,7 @@ The project is currently **under construction** and is being Dockerized for easy
 - 🖼️ Image analysis
 
 ## 🛠️ Instructions to Run the Project
-The project is being **Dockerized** for easy deployment. Stay tuned for further updates.
+The project is being **Dockerized** 🐬 for easy deployment. Stay tuned for further updates.
 
 ## 🎣 Phishing URL Detector
 Our phishing URL detector checks various parameters to identify potential threats. Here are some of the parameters it checks:
