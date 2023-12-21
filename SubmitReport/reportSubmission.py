@@ -1,13 +1,34 @@
+from openai import OpenAI
 
-async def submitReport(report, db):
+client = OpenAI(
+    api_key="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"
+)
+
+
+def submitReport(report, db):
     collection = db.userReports
-    data_to_save = {
-        "name": "John Doe",
-        "age": 30,
-        "email": "john.doe@example.com"
+    incident = {
+        "category": report['category'],
+        "subCategory": report['subCategory'],
+        "incidentDateTime": report['incidentDateTime'],
+        "incidentPlatform": report['incidentPlatform'],
+        "description": report['description'],
+        "imageUrl": report['imageUrl'],
+        "voiceTranscript": report['voiceTranscript']
     }
 
-    # Insert a single document into the collection
-    result = await collection.insert_one(data_to_save)
+    result = collection.insert_one(incident)
+
+    return result
+
+
+def transcribeReport(message):
+    pass
+
+
+def submitPhoneNumberReport(report, db):
+    collection = db.phoneNumberReports
+
+    result = collection.insert_one(report)
 
     return result

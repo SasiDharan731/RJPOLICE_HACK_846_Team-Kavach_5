@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, request, jsonify
 from UrlValidation import urlValidator
 from PhoneValidation import phoneNumberDetails
@@ -31,7 +33,7 @@ async def getPhoneNumberDetails():
     data = request.get_json()
     phoneNumber = data['phoneNumber']
 
-    search_result = await phoneNumberDetails.bulk_search(phoneNumber, '+91', installationId)
+    search_result = await phoneNumberDetails.search_phone_numbers(phoneNumber, '+91', installationId)
 
     for i, result in enumerate(search_result['data']['data']):
         try:
@@ -42,12 +44,19 @@ async def getPhoneNumberDetails():
     return jsonify(search_result['data'])
 
 
-@app.route('/submitReport', methods=['POST'])
-async def submitReport():
+@app.route('/voiceIncidentReport', methods=['POST'])
+def submitVoiceReport():
     data = request.get_json()
-    response = await reportSubmission.submitReport(data, myDb)
-    print(response)
-    return "Hello"
+    response = reportSubmission.transcribeReport(data['message'])
+    print(response.choices[0].message.content)
+    return jsonify({'status': 'success', 'message': response.choices[0].message.content})
+
+
+@app.route('/incidentReport', methods=['POST'])
+def submitReport():
+    data = request.get_json()
+    response = reportSubmission.submitReport(data, myDb)
+    return jsonify({'status': 'success', 'message': 'Report submitted successfully', 'id': str(response.inserted_id)})
 
 
 if __name__ == '__main__':

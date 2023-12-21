@@ -1,7 +1,7 @@
 import httpx
 
 
-async def bulk_search(phoneNumbers, countryCode, installationId):
+async def search_phone_numbers(phoneNumbers, countryCode, installationId):
     headers = {
         "content-type": "application/json; charset=UTF-8",
         "accept-encoding": "gzip",
