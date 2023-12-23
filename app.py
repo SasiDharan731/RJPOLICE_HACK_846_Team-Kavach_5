@@ -6,8 +6,10 @@ from PhoneValidation import phoneNumberDetails
 from helpers import constants
 from config import db
 from SubmitReport import reportSubmission
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 myDb = db.connectToDB()
 installationId = constants.CONSTANTS['INSTALLATION_ID']
 
