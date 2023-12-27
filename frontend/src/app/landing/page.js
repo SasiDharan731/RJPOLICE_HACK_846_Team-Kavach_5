@@ -1,26 +1,42 @@
 'use client'
 import Image from 'next/image';
 import Navbar from '../../../components/NavBar';
-import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'
 import axios from 'axios';
 
+import Dropzone from 'react-dropzone'
+import '../landing/page.css'
+import upload from '../../../public/images/upload.png'
 
 export default function LandingPage() {
   const[input,setInput] = useState()
-  const[fullInput,setFullInput] = useState()
-  
+
+  const router = useRouter()
+
   function handleStartProcessing() {
 
-    setFullInput(input)
+    const url_regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(input)
 
-    axios.post('http://localhost:6000/getPhoneNumberDetails',{
-      "phoneNumber" : "+919080111914"
-    })
-    .then(res =>{console.log(res)})
-    
-  }
-  // console.log(fullInput);
+    if (url_regex){
+      const encodedInput = encodeURIComponent(input);
+        router.push(`/websiteResult/${encodedInput}`)
+
+        axios.post('http://localhost:5000/scrapHtml',{
+          "url" : `${input}`
+        },
+
+        ).then(res =>{
+          console.log(res)
+        })
+
+    }
+
+    else{
+      router.push(`/phoneNumberResult/${input}`)
+    }
+
+}
 
   return (
     <div>
@@ -46,12 +62,33 @@ export default function LandingPage() {
               color:'grey'
             }}
           />
-
-          <Link href="/loading" style={{display:'flex',alignSelf:'center',textDecoration:'none'}}>
             <button 
               onClick={() => handleStartProcessing()}
-              style={{cursor:'pointer',width:200,height:60,borderRadius:40,marginTop:50,background:'#333', borderWidth:0,color:'white',fontSize:19,alignSelf:'center',fontWeight:600}}>Start Processing</button>
-          </Link>
+              style={{cursor:'pointer',width:200,height:60,borderRadius:40,marginTop:50,background:'#333', borderWidth:0,color:'white',fontSize:19,alignSelf:'center',fontWeight:600}}>
+                Start Processing
+            </button>
+
+            <div className='videoUpload__or'>
+              <hr width="80"/>
+              <h3>OR</h3>
+              <hr width="80"/>
+            </div>
+
+          <div style={{alignSelf:'center'}}>
+            <div className='videoUpload__upload'>
+              <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+                    {({getRootProps, getInputProps}) => (
+                      <section>
+                        <div {...getRootProps()}>
+                          <input {...getInputProps()} />
+                          <Image className='videoUpload__upload__icon' src={upload}/> 
+                          <p style={{color:'white',fontWeight:550}}>Drag 'n' drop Advertisement image or any image to validate</p>
+                        </div>
+                      </section>
+                    )}
+            </Dropzone>
+          </div>
+        </div>
 
         </div>
       

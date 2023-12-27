@@ -34,11 +34,6 @@ export default function PhoneNumberResultPage() {
             <h4 style={{display:'flex',justifyContent:'center',padding:50,fontSize:25}} >Basic Info</h4>
 
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-evenly'}}>
-                {/* <div>
-                    <Image style={{}} src="/images/website_shots.png" height={350} width={500}  />
-                    <p style={{color:'grey',fontWeight:600,display:'flex',justifyContent:'center'}}>ScreenShot</p>
-                </div> */}
-
                 <div style={{width : 600,boxShadow:'0 4px 8px rgba(0, 0, 0, 0.1)',borderRadius:10}}>
                     <CustomTable/>
                 </div>

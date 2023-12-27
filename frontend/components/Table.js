@@ -1,41 +1,79 @@
 import * as React from "react";
-
-import { CompactTable } from "@table-library/react-table-library/compact";
+import {
+  Table,
+  Header,
+  HeaderRow,
+  Body,
+  Row,
+  HeaderCell,
+  Cell,
+} from "@table-library/react-table-library/table";
 import { useTheme } from "@table-library/react-table-library/theme";
-import { getTheme } from "@table-library/react-table-library/baseline";
-import { nodes } from '../components/data';
+import { DEFAULT_OPTIONS, getTheme } from '@table-library/react-table-library/chakra-ui';
 
-const CustomTable = () => {
+const Component = ({nodes}) => {
+
   const data = { nodes };
-
-  const theme = useTheme(getTheme());
-
-  const COLUMNS = [
-
-    { label: "Task", renderCell: (item) => item.name },
-    
-    {
-      label: "Deadline",
-      renderCell: (item) =>
-        item.deadline.toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "2-digit",
-          day: "2-digit",
-        }),
-    },
-
-    {
-      label: "Complete",
-      renderCell: (item) => item.isComplete.toString(),
-    },
-
-  ];
+  const chakraTheme = getTheme(DEFAULT_OPTIONS);
+  const theme = useTheme(chakraTheme);
 
   return (
-    <div>
-      <CompactTable columns={COLUMNS} data={data} theme={theme} />
-    </div>
+    <>
+    <Table data={data} theme = {theme} >
+      {(tableList) => (
+        <>
+          <Header>
+            <HeaderRow>
+              <HeaderCell>Name</HeaderCell>
+              <HeaderCell>Values</HeaderCell>
+            </HeaderRow>
+          </Header>
+
+          <Body>
+            {tableList.map((item) => (
+              <Row>  
+                <Cell>Message</Cell>
+                <Cell>{item.message}</Cell>
+              </Row>
+              ))
+            }
+
+          {tableList.map((item) => (
+              <Row>  
+                <Cell>URL</Cell>
+                <Cell>{item.report.UsingIp.value}</Cell>
+              </Row>
+            ))
+          }
+          {tableList.map((item) => (
+              <Row>  
+                <Cell>GoogleIndex</Cell>
+                <Cell>{item.report.GoogleIndex}</Cell>
+              </Row>
+            ))
+          }
+          {tableList.map((item) => (
+              <Row>  
+                <Cell>HTTPSDomainURL</Cell>
+                <Cell>{item.report.HTTPSDomainURL}</Cell>
+              </Row>
+            ))
+          }
+          {tableList.map((item) => (
+              <Row>  
+                <Cell>LinksPointingToPage</Cell>
+                <Cell>{item.report.LinksPointingToPage}</Cell>
+              </Row>
+            ))
+          }
+          </Body>
+        </>
+      )}
+      
+    </Table>
+
+    </>
   );
 };
 
-export default CustomTable;
+export default Component;

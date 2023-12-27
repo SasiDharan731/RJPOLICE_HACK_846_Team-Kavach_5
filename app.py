@@ -61,5 +61,6 @@ def submitReport():
     return jsonify({'status': 'success', 'message': 'Report submitted successfully', 'id': str(response.inserted_id)})
 
 
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
