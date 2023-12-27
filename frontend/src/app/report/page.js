@@ -68,9 +68,10 @@ export default function ReportPage() {
 
                     </div>
                         
-                    <button 
+                    <button
+                        onClick={() => alert("Report submitted")}
                     style={{alignSelf:'center',marginTop:20,padding:15,width:180,backgroundColor:'#0045f5',color:'white',borderWidth:0,borderRadius:40,fontWeight:550,fontSize:18}}>
-                        Save
+                        Submit
                     </button>
                 
                 </div>            

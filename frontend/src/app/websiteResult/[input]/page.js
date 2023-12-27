@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { useEffect, useState } from "react";
 import Loading from "../../../../components/loading";
 import axios from "axios";
-import { nodes } from "../../../../components/data";
+
 import Link from "next/link";
 import Component from "../../../../components/moreDetailsTable";
-import { Black_And_White_Picture } from "next/font/google";
+
 
 
 export default function WebsiteResultPage({params}) {

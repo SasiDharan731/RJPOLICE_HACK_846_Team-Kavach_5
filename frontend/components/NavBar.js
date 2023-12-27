@@ -47,6 +47,7 @@ const Navbar = () => {
       </div>
       
       <div style={navLinks}>
+
         <h3 style={linkStyle}>Phishing</h3>
         <h3 style={linkStyle}>Whatsapp</h3>
         <h3 style={linkStyle}>Extension</h3>

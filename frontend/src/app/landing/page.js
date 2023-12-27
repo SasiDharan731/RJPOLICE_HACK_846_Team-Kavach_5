@@ -22,7 +22,7 @@ export default function LandingPage() {
       const encodedInput = encodeURIComponent(input);
         router.push(`/websiteResult/${encodedInput}`)
 
-        axios.post('http://localhost:5000/scrapHtml',{
+        axios.post('http://localhost:8080/scrapHtml',{
           "url" : `${input}`
         },
 
