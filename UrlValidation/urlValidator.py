@@ -16,4 +16,5 @@ def analyzeUrl(url):
     y_pro_phishing, y_pro_non_phishing = gbc.predict_proba(x)[0]
 
     report = obj.extractedFeatureSummary()
-    return y_pro_non_phishing, report
+    # return y_pro_non_phishing, report
+    return {"isSafe": y_pro_non_phishing, "report": report}
