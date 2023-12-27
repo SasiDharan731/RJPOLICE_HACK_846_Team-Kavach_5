@@ -18,12 +18,12 @@ The project is currently **under construction** and is being Dockerized for easy
 ### 🏆 Implemented features as of now
 - 🎯 Implemented machine learning to detect phishing links.
 - 🕵️ Extracted HTML from a site and performed analysis on the HTML content.
+- 🌐 Web portal
+- ☎️ Phone validation
+- 🤖 WhatsApp bot
 
 ### 📝 Pending Works
 - 🔗 Chrome extension
-- 🌐 Web portal
-- 🤖 WhatsApp bot
-- ☎️ Phone validation
 - 📧 Email validation
 - 🖼️ Image analysis
 
