@@ -1,15 +1,13 @@
 'use client'
-import Navbar from '../../../components/NavBar';
 import Lottie from 'lottie-react';
-import animationData from '../../../lottie-animation/loading_animation_2.json';
+import animationData from '../lottie-animation/loading_animation_2.json';
 import Typewriter from 'typewriter-effect';
 
+export default function Loading() {
 
-export default function loading() {
     return (
         <div style={{display:'flex',flexDirection:'column'}}>
-          <Navbar/>
-            
+        
           <Lottie
             animationData={animationData}
             loop={true}
@@ -17,14 +15,16 @@ export default function loading() {
             style={{width:450,height:450,display:'flex',alignSelf:'center',marginTop:30}}
           />
 
-            <div style={{display:'flex',alignSelf:'center',fontSize:20,fontWeight:700}} onClick={() => navigate('/result')} >
+            <div style={{display:'flex',alignSelf:'center',fontSize:20,fontWeight:700,color:'grey'}} onClick={() => navigate('/result')} >
 
             <Typewriter
                 options={{
-                    deleteSpeed:60,
+                    delay :30,
+                    deleteSpeed:10,
                     strings: ['Gathering Informations🔍', 'Analayzing the potential threats...🕵🏽','Detecting the potential threats...⚡'],
                     autoStart: true,
                     loop: true,
+                    skipAddStyles:true
                 }}
             />
             
