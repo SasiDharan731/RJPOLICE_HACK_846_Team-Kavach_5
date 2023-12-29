@@ -8,6 +8,8 @@
 
 ### 📄 Idea Document - [Drive Link](https://drive.google.com/file/d/1q0AxfBAqZmZL_myWrxjrcs3yncAeE8Hx/view?usp=sharing)
 
+### 📹Progress video 1 - https://youtu.be/Lxqti5qCmrU
+
 ## 🌐 Project Overview
 ### Problem Statement
 **Automated AI/ML System for Detecting and Mitigating Online Fraud**
