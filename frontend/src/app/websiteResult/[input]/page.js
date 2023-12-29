@@ -64,7 +64,7 @@ export default function WebsiteResultPage({params}) {
             </div>
 
             <div style={{lineHeight:0.3 , marginTop:50,marginBottom:50}}>
-                <h1 style={{display:'flex',flexDirection:'column',alignItems:'center',color: textColor ? 'green' : 'red'}}>{(details.url_score * 100).toFixed(1)}%</h1>
+                <h1 style={{display:'flex',flexDirection:'column',alignItems:'center',color: 'green'}}>{(details.url_score * 100).toFixed(1)}%</h1>
                 <p style={{display:'flex',flexDirection:'column',alignItems:'center',color:'grey',fontWeight:600}}>Score</p>
             </div>
 
@@ -76,7 +76,7 @@ export default function WebsiteResultPage({params}) {
 
             <div style={{display:'flex',alignItems:'center',justifyContent:'space-evenly'}}>
                 <div>
-                    <Image style={{}} src="/images/website_shots.png" height={350} width={500}  />
+                    {/*<Image style={{}} src="/images/website_shots.png" height={350} width={500}  />*/}
                     <p style={{color:'grey',fontWeight:600,display:'flex',justifyContent:'center'}}>ScreenShot</p>
                 </div>
                 <div style={{width : 800,height:280,boxShadow:'0 4px 8px rgba(0, 0, 0, 0.1)',borderRadius:10}}>
