@@ -1,17 +1,28 @@
-from datetime import datetime
+import re
 
+from bs4 import BeautifulSoup
 from flask import Flask, request, jsonify
 from UrlValidation import urlValidator
 from PhoneValidation import phoneNumberDetails
-from helpers import constants
+from helpers import constants, sendWhatsappMessage
 from config import db
 from SubmitReport import reportSubmission
 from flask_cors import CORS
+from twilio.twiml.messaging_response import MessagingResponse
+from AiAssistant import assistant
+import requests
+from PIL import Image
+import pytesseract
+from io import BytesIO
 
 app = Flask(__name__)
 CORS(app)
 myDb = db.connectToDB()
 installationId = constants.CONSTANTS['INSTALLATION_ID']
+
+@app.route('/', methods=['GET'])
+def health():
+    return jsonify({"data": "OK"})
 
 
 # This endpoint is used for the validation of the URL of any site
@@ -20,14 +31,14 @@ def getUrlScore():
     data = request.get_json()
     url = data['url']
 
-    url_score, report = urlValidator.analyzeUrl(url)
+    response = urlValidator.analyzeUrl(url)
 
-    if url_score > 0.70:
+    if response["isSafe"] > 0.70:
         message = "Url is safe to visit"
     else:
         message = "Url is risky"
 
-    return jsonify({'url_score': url_score, 'message': message, 'report': report})
+    return jsonify({'url_score': response["isSafe"], 'message': message, 'report': response["report"]})
 
 
 @app.route('/getPhoneNumberDetails', methods=['POST'])
@@ -61,6 +72,18 @@ def submitReport():
     return jsonify({'status': 'success', 'message': 'Report submitted successfully', 'id': str(response.inserted_id)})
 
 
+@app.route('/whatsappMessage', methods=['POST'])
+async def whatsappMessage():
+    # Fetch the message
+    msg = request.form.get('Body')
+
+    # Create reply
+    resp = MessagingResponse()
+    reply = await assistant.whatsappAssistant(msg)
+    print("reply:", reply)
+    resp.message(reply)
+
+    return str(resp)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host="0.0.0.0", port=8000, debug=True)

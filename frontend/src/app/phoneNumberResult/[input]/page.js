@@ -34,14 +34,13 @@ export default function PhoneNumberResultPage({params}) {
 
             {   
                 loading ? 
-                <Loading/> : 
-                
+                <Loading/> :
             <> 
 
             <div style={{lineHeight:0.5,marginTop:50,marginBottom:50}}>
                 
                 <h1 style={{display:'flex',flexDirection:'column',alignItems:'center',color:'green'}}>{
-                    details.data[0].value.score * 100 > 70 ? "PHONE NUMBER IS SAFE" : "PHONE NUMBER IS NOT SAFE"
+                    details.data[0].value.score * 100 < 70 ? "PHONE NUMBER IS SAFE" : "PHONE NUMBER IS NOT SAFE"
                 }</h1>
                 <p style={{display:'flex',flexDirection:'column',alignItems:'center',color:'blue',textDecoration:'underline',cursor:'pointer'}}>{details.data[0].key}</p>
             </div>

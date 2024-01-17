@@ -2,6 +2,7 @@ import json
 
 from openai import OpenAI
 from PhoneValidation import phoneNumberDetails
+from UrlValidation import urlValidator
 from helpers import constants
 import asyncio
 
@@ -12,11 +13,32 @@ client = OpenAI(
 )
 
 
+def formatResponse(data):
+    name = data['data']['data'][0]['value']['name']
+    city = data['data']['data'][0]['value']['addresses'][0]['city']
+    score = data['data']['data'][0]['value']['score'] or "0"
+    if score > 0.7:
+        message = "Safe number"
+    else:
+        message = "Number is not safe"
+    return "*This phone number belongs to* \n \n *Name*: {}\n *City*: {}\n *Scam score*: {}\n".format(name, city, score)
+
+
+def formatResponseUrl(data):
+    if data['isSafe'] > 0.7:
+        return "*Safe to visit this url*, To get complete report check it out in our dashboard"
+    else:
+        return "*NOT SAFE TO VISIT*, Might be scam or phising link"
+
+
 async def whatsappAssistant(message):
-    messages = [{"role": "system", "content": "You are a Rajasthan cyber crime awareness Whatsapp bot, You will be "
+    messages = [{"role": "system", "content": "You are a Rajasthan cyber crime awareness Whatsapp bot created by "
+                                              "Team_Kavach(Reg id: RJPOLICE_HACK_846) for Rajasthan police hackathon, "
+                                              "You will be"
                                               "capable of checking URLs, False advertisements, Phone numbers, "
                                               "email addresses, and you can also be used to report cyber crimes via "
-                                              "voice notes also"},
+                                              "voice notes also. You should respond in their language alone,"
+                                              "for example if they message in hindi reply in hindi"},
                 {"role": "user", "content": message}
                 ]
     tools = [
@@ -40,6 +62,23 @@ async def whatsappAssistant(message):
                     "required": ["phoneNumber"],
                 },
             },
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "check_url",
+                "description": "Check the given URL for authenticity and potential security risks.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "url": {
+                            "type": "string",
+                            "description": "URL to be checked"
+                        },
+                    },
+                    "required": ["url"],
+                },
+            },
         }
     ]
 
@@ -57,6 +96,7 @@ async def whatsappAssistant(message):
 
         available_functions = {
             "search_phone_numbers": phoneNumberDetails.search_phone_numbers,
+            "check_url": urlValidator.analyzeUrl
         }
         messages.append(response_message)
 
@@ -65,26 +105,18 @@ async def whatsappAssistant(message):
             function_to_call = available_functions[function_name]
             function_args = json.loads(tool_call.function.arguments)
 
-            function_response = await function_to_call(
-                phoneNumbers=function_args.get("phoneNumbers"),
-                countryCode="+91",
-                installationId=installationId
-            )
+            if asyncio.iscoroutinefunction(function_to_call):
+                function_response = await function_to_call(**function_args)
+            else:
+                function_response = function_to_call(**function_args)
 
-            try:
-                print("Phone number details: \n"
-                      "Name : " + function_response['data']['data'][0]['value']['name'] + "\n"
-                                                                                          "City : " +
-                      function_response['data']['data'][0]['value']['addresses'][0]['city'] + "\n"
-                                                                                              "Scam score: " + "0")
-            except(KeyError, IndexError, AttributeError):
-                print("Phone number details: \n"
-                      "Name : " + "Unknown name" + "\n"
-                                                   "City : " +
-                      function_response['data']['data'][0]['value']['addresses'][0]['city'] + "\n"
-                                                                                              "Scam score: " + "0")
+            if tool_call.function.name == "search_phone_numbers":
+                return formatResponse(function_response)
+            elif tool_call.function.name == "check_url":
+                return formatResponseUrl(function_response)
+
     else:
-        print(response_message.content)
+        return response_message.content
 
 
 if __name__ == "__main__":
