@@ -31,7 +31,6 @@ export default function LandingPage() {
         // axios.post('http://localhost:8080/scrapHtml',{
         //   "url" : `${input}`
         // },
-        //
         // ).then(res =>{
         //   console.log(res)
         // })
