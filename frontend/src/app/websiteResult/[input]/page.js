@@ -28,7 +28,6 @@ export default function WebsiteResultPage({params}) {
                 setLoading(false)
                 setDetails(res.data)
             })
-            
     },[])
     
     function handleMoreDetails() {

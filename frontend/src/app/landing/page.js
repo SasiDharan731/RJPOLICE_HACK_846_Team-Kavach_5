@@ -28,13 +28,13 @@ export default function LandingPage() {
         //   "url" : `${input}`
         // },
 
-        axios.post('http://localhost:8080/scrapHtml',{
-          "url" : `${input}`
-        },
+        // axios.post('http://localhost:8080/scrapHtml',{
+        //   "url" : `${input}`
+        // },
 
-        ).then(res =>{
-          console.log(res)
-        })
+        // ).then(res =>{
+        //   console.log(res)
+        // })
 
     }
     else if(mobileNumber_regex){
