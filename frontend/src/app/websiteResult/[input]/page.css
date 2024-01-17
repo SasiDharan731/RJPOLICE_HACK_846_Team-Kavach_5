@@ -1,0 +1,152 @@
+/* WebsiteResultPage.css */
+
+/* General styles */
+.container {
+    line-height: 0.5;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .centered-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .underline-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  /* Separator line */
+  .separator-line {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .line {
+    height: 1.5;
+    width: 950px;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Score section */
+  .score-section {
+    line-height: 0.3;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+  .score-value {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .green-text {
+    color: green;
+  }
+  
+  .red-text {
+    color: red;
+  }
+  
+  .score-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: grey;
+    font-weight: 600;
+  }
+  
+  /* Separator line for score section */
+  .separator-line-score {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .line-score {
+    height:1.5;
+    width:950;
+    background-color:'grey';
+    display:'flex';
+    align-items:'center';
+    justify-content:'center'
+  }
+  
+  /* Basic Info heading */
+  .basic-info-heading {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    font-size: 25px;
+  }
+  
+  /* Image and CustomTable section */
+  .info-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  
+  .screenshot-container {
+    margin-right: 20px;
+  }
+  
+  .screenshot-image {
+    width: 500px;
+    height: 350px;
+  }
+  
+  .screenshot-label {
+    color: grey;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .custom-table-container {
+    width: 800px;
+    height: 280px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  /* More Details button section */
+  .more-details-section {
+    display: flex;
+    justify-content: center;
+    padding: 70px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .more-details-button {
+    width: 200px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 520;
+  }
+  
+  /* More Details component section */
+  .more-details-component {
+    width: 1000px;
+    height: 1580px;
+    margin-top: 40px;
+    border-width: 2px;
+    border-color: black;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  

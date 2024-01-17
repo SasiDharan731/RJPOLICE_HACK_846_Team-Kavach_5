@@ -3,24 +3,30 @@ import Image from 'next/image';
 import Navbar from '../../../components/NavBar';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
+import Link from 'next/link';
 import axios from 'axios';
 
 import Dropzone from 'react-dropzone'
 import '../landing/page.css'
 import upload from '../../../public/images/upload.png'
 
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function LandingPage() {
   const[input,setInput] = useState()
-
+  const[toastLoading,setToastLoading] = useState(false)
   const router = useRouter()
 
   function handleStartProcessing() {
-
     const url_regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(input)
-
+    const mobileNumber_regex = /^(\+91-|\+91|0)?[6789]\d{9}$/.test(input);
     if (url_regex){
       const encodedInput = encodeURIComponent(input);
         router.push(`/websiteResult/${encodedInput}`)
+        // axios.post('http://localhost:5000/scrapHtml',{
+        //   "url" : `${input}`
+        // },
 
         axios.post('http://localhost:8080/scrapHtml',{
           "url" : `${input}`
@@ -31,12 +37,24 @@ export default function LandingPage() {
         })
 
     }
-
-    else{
+    else if(mobileNumber_regex){
       router.push(`/phoneNumberResult/${input}`)
     }
-
+    else{
+      setToastLoading(true)
+    }
 }
+const notify = () => toast("Wow so easy!");
+toast.error('Provide the correct input ⚡', {
+  // position: "top-right",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  });
 
   return (
     <div>
@@ -46,7 +64,7 @@ export default function LandingPage() {
         
         <Image src='/images/landing_2.jpg' width={500} height={500} style={{marginRight:90,marginTop:30 }} />
         
-        <div style={{flexDirection:'column',display:'flex'}}>
+        <div style={{flexDirection:'column',display:'flex',alignItems:'center'}}>
           <input
             type='text'
             onChange={(e) => setInput(e.target.value)}
@@ -82,17 +100,42 @@ export default function LandingPage() {
                         <div {...getRootProps()}>
                           <input {...getInputProps()} />
                           <Image className='videoUpload__upload__icon' src={upload}/> 
-                          <p style={{color:'white',fontWeight:550}}>Drag 'n' drop Advertisement image or any image to validate</p>
+                          <p style={{color:'white',fontWeight:600}}>Drag 'n' drop image to validate</p>
                         </div>
                       </section>
                     )}
-            </Dropzone>
+               </Dropzone>
+                <Link href='/imageAnalysis'>
+                  <div className='right-arrow-container'>
+                    <Image
+                      src='/images/right_arrow.png'
+                      width={20}
+                      height={20}
+                    />
+                  </div>
+                </Link>
           </div>
-        </div>
+         </div>
 
         </div>
-      
       </div>
+
+      { toastLoading ?  
+        <div>
+          <ToastContainer
+          position="down-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
+        </div> : null
+      }
+
     </div>
   );
 }
