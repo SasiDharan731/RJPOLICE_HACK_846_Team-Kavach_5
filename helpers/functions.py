@@ -1,5 +1,7 @@
 from language_tool_python import LanguageTool
-
+import urllib.request
+from pydub import AudioSegment
+import os
 import requests
 
 url = "https://google-reverse-image-api.vercel.app/reverse"
@@ -13,14 +15,23 @@ else:
     print(response.status_code)
 
 
-
 def has_grammar_errors(text):
     tool = LanguageTool('en-US')
     matches = tool.check(text)
     return len(matches) > 0
 
 
-text_with_errors = "Hi Joe"
-has_errors = has_grammar_errors(text_with_errors)
+def ogg2mp3(audio_url):
+    # Get the response of the OGG file
+    response = requests.get(audio_url)
 
-print(has_errors)
+    # Get the redirect URL result
+    url = response.url  # `url` value something like this: "https://s3-external-1.amazonaws.com/media.twiliocdn.com/<some-hash>/<some-other-hash>"
+    print(url)
+    # Download the OGG file
+    urllib.request.urlretrieve(url, "data/audio.ogg")
+    # Load the OGG file
+    audio_file = AudioSegment.from_ogg("data/audio.ogg")
+    # Export the file as MP3
+    audio_file.export("data/audio.mp3", format="mp3")
+    return os.path.join(os.getcwd(), "data/audio.mp3")

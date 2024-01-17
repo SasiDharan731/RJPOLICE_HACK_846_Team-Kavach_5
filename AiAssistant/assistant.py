@@ -119,5 +119,21 @@ async def whatsappAssistant(message):
         return response_message.content
 
 
+async def transcribe(mp3_file_path):
+    with open(mp3_file_path, "rb") as audio_file:
+        # Call the OpenAI API to transcribe the audio using Whisper API
+        whisper_response = client.audio.transcriptions.create(
+            file=audio_file,
+            model="whisper-1",
+            response_format="text",
+        )
+        print(f"""
+            Transcribed the voice note to the following text: {whisper_response}.
+                Now it's being sent to ChatGPT API to reply...
+            """)
+
+        return whisper_response
+
+
 if __name__ == "__main__":
     asyncio.run(whatsappAssistant("+919944910314"))
