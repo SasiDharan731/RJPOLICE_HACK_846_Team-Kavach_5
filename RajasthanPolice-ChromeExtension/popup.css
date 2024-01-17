@@ -1,0 +1,136 @@
+* {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+html{
+    border-radius: 20px;
+    /* wrong url */
+    /* background-color: #F18282; */
+    /* valid url */
+    /* background-color:#cedcce; */
+    /* c3efc3 */
+}
+.container{
+    width: 340px;
+}
+.website-logo{
+    display: flex;
+    align-self: center;
+    width: 25px;
+    height: 25px;
+}
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    /* background-color: antiquewhite; */
+}
+.rajasthan-police-logo{
+    width: 40px;
+    height: 40px;
+}
+.settings-icon{
+    width: 20px;
+    height: 20px;
+}
+.close-icon{
+    width: 25px;
+    height: 25px;
+    margin-left: 8px;
+}
+.settings-close-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 210px;
+}
+.url-and-logo {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    /* background-color:bisque; */
+    margin: 10px;
+    border-radius: 20px;
+}
+.website-url{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    color: #60B560;
+    font-weight: 600;
+    font-size: 15px;
+}
+.score-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+.score{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center; 
+    justify-content: center;
+    width: 65px;
+    height: 50px;
+    line-height: 0px;
+    background-color:aliceblue;
+    border-radius: 15px; 
+}
+.score-text{
+    color: grey;
+    font-weight: 700;
+    font-size: 15px;
+    margin-top: 5px;
+}
+.score-value{
+    color: #60B560;
+    font-size: 15px;
+    font-weight: 500;
+}
+.website-info-wrap{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+.website-info{
+    width: 278px;
+    height: 114px;
+    background-color: aliceblue;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.trust{
+    width: 25px;
+    height: 25px;
+    margin-right:5px;
+}
+.trust-info{
+    display: flex;
+    align-items: center;
+    margin-left:5px;
+    font-size: 12px;
+    font-weight: 450;
+}
+.ratings-info{
+    display: flex;
+    margin-bottom: 40px;
+    margin-left: 8px;   
+    margin-top: 10px;
+}
+.star{
+    width:10px;
+    height:10px;
+    align-items: center;
+    display: flex;
+    align-self: center;
+}
+.provide-ratings{
+    background-color:blue;
+}

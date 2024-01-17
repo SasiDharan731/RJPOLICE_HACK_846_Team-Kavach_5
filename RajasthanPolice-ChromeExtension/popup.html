@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- navbar -->
+      <div class="navbar">
+        <div>
+          <img
+            class="rajasthan-police-logo"
+            src="./images/Rajasthan_Police_Logo.png"
+          />
+        </div>
+        <div class="settings-close-icons">
+          <img class="settings-icon" src="./images/settings.png" />
+          <img class="close-icon" src="./images/close.png" />
+        </div>
+      </div>
+      <!-- navbar -->
+      <hr />
+      <div class="url-and-logo">
+        <img
+          class="website-logo"
+          id="website_logo"
+          src="images/logo_of_Website.png"
+        />
+        <p class="website-url" id="url">pizzaonline.dominos.co.in</p>
+      </div>
+      <div class="score-wrap">
+        <div class="score">
+          <p class="score-value">92%</p>
+          <p class="score-text">SCORE</p>
+        </div>
+      </div>
+
+      <!-- Trusted-info & ratings -->
+      <div style="overflow: scroll; height: 250px">
+        <div class="website-info-wrap">
+          <div class="website-info" style="line-height: 0px">
+            <div style="margin-left: 12px; display: flex">
+              <img src="./images/trust.png" class="trust" />
+              <h3 style="color: grey; align-items: center; display: flex">
+                Trusted Website
+              </h3>
+            </div>
+            <!-- <div style="margin-left: 12px; display: flex; margin-top: 15px">
+            <h3 style="font-size: 25px; font-weight: 800; color: grey">3.4</h3>
+            <div style="display: flex; margin-left: 10px">
+              <img src="./images/star-colored.png" class="star" />
+              <img src="./images/star-colored.png" class="star" />
+              <img src="./images/star-colored.png" class="star" />
+              <img src="./images/star-colored.png" class="star" />
+            </div>
+          </div> -->
+          </div>
+        </div>
+        <!-- Trusted-info & ratings -->
+        <div class="website-info-wrap">
+          <div class="website-info" style="line-height: 0px">
+            <div style="margin-left: 12px; display: flex">
+              <!-- <img src="./images/trust.png" class="trust" /> -->
+              <h3 style="color: grey; align-items: center; display: flex">
+                URL pattern score :
+              </h3>
+              <h3 id="urlScore">80</h3>
+            </div>
+          </div>
+        </div>
+        <!-- Phone Number && Email Info -->
+        <div class="website-info-wrap">
+          <div class="website-info" style="line-height: 0px">
+            <div style="margin-left: 12px">
+              <h3 style="color: grey">Phone Number</h3>
+              <div style="display: flex">
+                <h3 style="color: #60b560; margin-top: 5px" id="phoneNumber">
+                  +91 9080111914
+                </h3>
+                <img
+                  id="phoneNumberScoreImg"
+                  class="trust"
+                  style="display: flex; align-self: center"
+                  src="./images/trust.png"
+                />
+                <p id="PhoneNumberScore"></p>
+              </div>
+            </div>
+
+            <div style="margin-left: 12px">
+              <h3 style="color: grey">Email</h3>
+              <div style="display: flex; line-height: 0px">
+                <h3 style="color: #f18282; margin-top: 5px">
+                  brohithkumar02@gmail.com
+                </h3>
+                <img
+                  class="trust"
+                  style="display: flex; align-self: center"
+                  src="./images/danger.png"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Phone Number && Email Info -->
+
+      <div
+        style="
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          margin-top: 20px;
+          list-style: none;
+          margin: 15px;
+        "
+      >
+        <div style="line-height: 0%">
+          <img
+            src="./images/thumbs-up.png"
+            style="width: 40px; height: 40px; margin-right: 170px"
+          />
+          <p
+            style="
+              text-decoration: underline;
+              color: grey;
+              font-weight: 500;
+              margin-left: 8px;
+            "
+          >
+            Like
+          </p>
+        </div>
+        <div style="line-height: 0%">
+          <img src="./images/reportpng.png" style="width: 40px; height: 40px" />
+          <p style="text-decoration: underline; color: grey; font-weight: 500">
+            Report
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="./scripts/popup.js"></script>
+  <!-- <script src="./scripts/background.js"></script> -->
+</html>
