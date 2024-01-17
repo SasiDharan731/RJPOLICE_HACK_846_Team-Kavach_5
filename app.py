@@ -20,6 +20,7 @@ CORS(app)
 myDb = db.connectToDB()
 installationId = constants.CONSTANTS['INSTALLATION_ID']
 
+
 @app.route('/', methods=['GET'])
 def health():
     return jsonify({"data": "OK"})
@@ -43,18 +44,22 @@ def getUrlScore():
 
 @app.route('/getPhoneNumberDetails', methods=['POST'])
 async def getPhoneNumberDetails():
-    data = request.get_json()
-    phoneNumber = data['phoneNumber']
+    global search_result
+    try:
+        data = request.get_json()
+        phoneNumber = data['phoneNumber']
 
-    search_result = await phoneNumberDetails.search_phone_numbers(phoneNumber, '+91', installationId)
+        search_result = await phoneNumberDetails.search_phone_numbers(phoneNumber, '+91', installationId)
 
-    for i, result in enumerate(search_result['data']['data']):
-        try:
-            name = result['value']['name']
-        except (AttributeError, IndexError, KeyError):
-            result['value']['name'] = "Unknown Name"
+        for i, result in enumerate(search_result['data']['data']):
+            try:
+                name = result['value']['name']
+            except (AttributeError, IndexError, KeyError):
+                result['value']['name'] = "Unknown Name"
 
-    return jsonify(search_result['data'])
+        return jsonify(search_result['data'])
+    except Exception as e:
+        return search_result
 
 
 @app.route('/voiceIncidentReport', methods=['POST'])
@@ -70,6 +75,7 @@ def submitReport():
     data = request.get_json()
     response = reportSubmission.submitReport(data, myDb)
     return jsonify({'status': 'success', 'message': 'Report submitted successfully', 'id': str(response.inserted_id)})
+
 
 @app.route('/testMsg', methods=['POST'])
 async def whatsappTestMessage():
@@ -91,5 +97,14 @@ async def whatsappTestMessage():
     return "Hi"
 
 
+@app.route('/imageAnalysis', methods=['POST'])
+async def imageAnalysis():
+    form_data = request.get_json()
+    text = functions.extractTextFromImage(form_data['url'])
+    return text
+
+
+
+
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)

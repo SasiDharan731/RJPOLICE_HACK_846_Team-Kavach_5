@@ -3,6 +3,9 @@ import urllib.request
 from pydub import AudioSegment
 import os
 import requests
+import easyocr
+from io import BytesIO
+from PIL import Image
 
 url = "https://google-reverse-image-api.vercel.app/reverse"
 data = {"imageUrl": "https://fastly.picsum.photos/id/513/200/300.jpg?hmac=KcBD-M89_o9rkxWW6PS2yEfAMCfd3TH9McppOsf3GZ0"}
@@ -35,3 +38,17 @@ def ogg2mp3(audio_url):
     # Export the file as MP3
     audio_file.export("data/audio.mp3", format="mp3")
     return os.path.join(os.getcwd(), "data/audio.mp3")
+
+
+def extractTextFromImage(image_url):
+    response = requests.get(image_url)
+    img = Image.open(BytesIO(response.content))
+
+    # Perform OCR using EasyOCR
+    reader = easyocr.Reader(['en'])  # You can specify the language(s) you want to use
+    result = reader.readtext(img)
+
+    # Extract and concatenate the recognized text
+    text = ' '.join([entry[1] for entry in result])
+
+    return text

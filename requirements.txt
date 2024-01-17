@@ -19,3 +19,4 @@ language_tool_python==2.7.1
 django-googlesearch==0.2
 pydub==0.25.1
 decouple==0.0.7
+easyocr==1.7.1
