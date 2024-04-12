@@ -1,10 +1,10 @@
 from twilio.rest import Client
 
-account_sid = "ACafa5dd6f66dac1e97e894923ca8da35a"
-auth_token = "9a2f52afd3c4cc25f19772fa260d9044"
+account_sid = "SEC"
+auth_token = "SEC"
 client = Client(account_sid, auth_token)
 
-twilio_number = "+14155238886"
+twilio_number = "SEC"
 
 
 # def sendMessage(to, message):
